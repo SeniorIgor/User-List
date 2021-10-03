@@ -1,4 +1,5 @@
 import { FC, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 
 import { Pagination } from '../Pagination';
 
@@ -23,6 +24,8 @@ export const PeopleTable: FC<Props> = () => {
       const { name, birth_year, eye_color, gender, hair_color, height, url } =
         character;
 
+      const id = character.url.replaceAll(/\D/g, '');
+
       return (
         <tr key={url}>
           <td>{name}</td>
@@ -31,6 +34,9 @@ export const PeopleTable: FC<Props> = () => {
           <td>{gender}</td>
           <td>{hair_color}</td>
           <td>{height}</td>
+          <td>
+            <Link to={`/people/${id}`}>Details</Link>
+          </td>
         </tr>
       );
     });
@@ -56,6 +62,7 @@ export const PeopleTable: FC<Props> = () => {
             <th>Gender</th>
             <th>Hair color</th>
             <th>Height</th>
+            <th />
           </tr>
         </thead>
         <tbody>{renderedPeople}</tbody>

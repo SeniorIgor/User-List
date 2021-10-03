@@ -8,8 +8,7 @@ import { selectPeopleReducer } from '../../store/people/selectors';
 import Style from './Search.module.sass';
 
 interface Props {
-  className: string;
-  onChange: (search: string) => void;
+  className?: string;
 }
 
 export const Search: FC<Props> = ({ className }) => {

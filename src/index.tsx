@@ -2,12 +2,9 @@
 
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Route } from 'react-router';
-import { Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 
-import App from './pages/App';
-import NotFound from './pages/NotFound';
+import { Routes } from './routes';
 
 import { store } from './store';
 import { history } from './store/root-reducer';
@@ -15,10 +12,7 @@ import { history } from './store/root-reducer';
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <Switch>
-        <Route path="/" component={App} exact />
-        <Route component={NotFound} />
-      </Switch>
+      <Routes />
     </ConnectedRouter>
   </Provider>,
   document.getElementById('root')

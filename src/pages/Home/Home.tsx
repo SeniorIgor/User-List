@@ -1,10 +1,14 @@
-import { useTypedSelector } from '../hooks';
-import { selectPeopleReducer } from '../store/people/selectors';
+import { FC } from 'react';
 
-import { PeopleTable } from '../components/PeopleTable';
-import { Search } from '../components/Search';
+import { useTypedSelector } from '../../hooks';
+import { selectPeopleReducer } from '../../store/people/selectors';
 
-function App() {
+import { PeopleTable } from '../../components/PeopleTable';
+import { Search } from '../../components/Search';
+
+import Style from './Home.module.sass';
+
+export const Home: FC = () => {
   const { loading, error } = useTypedSelector(selectPeopleReducer);
 
   const renderedContent = () => {
@@ -27,13 +31,11 @@ function App() {
     <div className="container">
       <h1>Star Wars People</h1>
 
-      <Search />
+      <Search className={Style.search} />
 
       {renderedContent()}
 
       <div></div>
     </div>
   );
-}
-
-export default App;
+};
