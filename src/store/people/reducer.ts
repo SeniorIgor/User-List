@@ -1,13 +1,12 @@
-import { RootState } from './../root-reducer';
 import { Action } from '../root-action';
-import { Types, RequestPayload } from './types';
+import { Types, RequestPayload, Response } from './types';
 
 interface PeopleState {
   page: number;
   search: string;
   loading: boolean;
   error: string | null;
-  data: {} | null;
+  data: Response | null;
 }
 
 const initialState: PeopleState = {
@@ -32,6 +31,12 @@ export const reducer = (state = initialState, action: Action): PeopleState => {
   switch (action.type) {
     case Types.LOAD_USERS_REQUEST:
       return loadEUsersRequest(state, action.payload);
+
+    case Types.LOAD_USERS_SUCCESS:
+      return { ...state, loading: false, data: action.payload };
+
+    case Types.LOAD_USERS_FAILURE:
+      return { ...state, loading: false, error: action.payload };
 
     default:
       return state;

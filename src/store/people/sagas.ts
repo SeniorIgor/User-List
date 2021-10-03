@@ -1,18 +1,16 @@
-import axios from 'axios';
-import { call, takeEvery, put } from 'redux-saga/effects';
+import axios, { AxiosResponse } from 'axios';
+import { call, takeEvery, put, take, fork, select } from 'redux-saga/effects';
+import { LOCATION_CHANGE, LocationChangeAction } from 'connected-react-router';
 
-import { Response } from './types';
+import { fetchUsersRequest, fetchUsersSuccess } from './action-creators';
+import { selectPeopleReducer } from './selectors';
+import { FetchUsersRequest } from './actions';
+import { Types, Response } from './types';
 
 interface Payload {
   page: number;
   search: string;
 }
-
-interface LoadPeopleList {
-  payload: Payload;
-}
-
-// пишу строку на русском и вроде не подчеркивает
 
 const fetchPeopleList = ({ page, search }: Payload) => {
   const url = `https://swapi.dev/api/people?page=${page}&search=${search}`;
@@ -22,11 +20,27 @@ const fetchPeopleList = ({ page, search }: Payload) => {
 
 export function* loadPeopleDetails() {}
 
-export function* loadPeopleList({ payload }: LoadPeopleList) {
-  const data: Response = yield call(fetchPeopleList, payload);
-  yield put({});
+export function* loadPeopleList({ payload }: FetchUsersRequest) {
+  const response: AxiosResponse<Response> = yield call(
+    fetchPeopleList,
+    payload
+  );
+  yield put(fetchUsersSuccess(response.data));
 }
 
-export function* watcher() {
-  takeEvery('', loadPeopleList);
+export function* loadPageWatcher() {
+  while (true) {
+    const action: LocationChangeAction = yield take(LOCATION_CHANGE);
+
+    if (action.payload.location.pathname === '/') {
+      const { page, search } = yield select(selectPeopleReducer);
+
+      yield put(fetchUsersRequest({ page, search }));
+    }
+  }
+}
+
+export function* peopleSaga() {
+  yield fork(loadPageWatcher);
+  yield takeEvery(Types.LOAD_USERS_REQUEST, loadPeopleList);
 }

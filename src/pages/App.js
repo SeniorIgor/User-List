@@ -1,18 +1,37 @@
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useTypedSelector } from '../hooks';
+import { selectPeopleReducer } from '../store/people/selectors';
+
+import { PeopleTable } from '../components/PeopleTable';
+import { Search } from '../components/Search';
 
 function App() {
-  const store = useSelector((store) => store);
-  // const dispatch = useDispatch();
+  const { loading, error } = useTypedSelector(selectPeopleReducer);
 
-  console.log(store);
+  const renderedContent = () => {
+    if (loading) {
+      return <div>Loading...</div>;
+    }
+
+    if (error) {
+      return (
+        <div>
+          Error: <p>{error}</p>
+        </div>
+      );
+    }
+
+    return <PeopleTable />;
+  };
 
   return (
-    <div className="App">
-      Hi there!
-      <div>
-        <Link to="/blog">Blog</Link>
-      </div>
+    <div className="container">
+      <h1>Star Wars People</h1>
+
+      <Search />
+
+      {renderedContent()}
+
+      <div></div>
     </div>
   );
 }
