@@ -15,7 +15,7 @@ interface RouteList {
 
 export const RouteNames = {
   MAIN_ROUTE: 'MAIN_ROUTE',
-  PEOPLE_DETAILS_ROUTE: 'PEOPLE_DETAILS_ROUTE',
+  USER_DETAILS_ROUTE: 'USER_DETAILS_ROUTE',
   NOT_FOUND_ROUTE: 'NOT_FOUND_ROUTE',
 };
 
@@ -27,7 +27,7 @@ const routes: RouteList[] = [
     component: Home,
   },
   {
-    id: RouteNames.PEOPLE_DETAILS_ROUTE,
+    id: RouteNames.USER_DETAILS_ROUTE,
     path: '/people/:id',
     exact: true,
     component: Details,

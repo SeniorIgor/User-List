@@ -2,8 +2,8 @@ import { FC, ChangeEventHandler } from 'react';
 import classNames from 'classnames';
 
 import { useTypedSelector, useTypedDispatch } from '../../hooks';
-import { fetchUsersRequest } from '../../store/people/action-creators';
-import { selectPeopleReducer } from '../../store/people/selectors';
+import { loadUsersRequest } from '../../store/users/action-creators';
+import { selectUsersReducer } from '../../store/users/selectors';
 
 import Style from './Search.module.sass';
 
@@ -12,12 +12,12 @@ interface Props {
 }
 
 export const Search: FC<Props> = ({ className }) => {
-  const { search } = useTypedSelector(selectPeopleReducer);
+  const { search } = useTypedSelector(selectUsersReducer);
   const dispatch = useTypedDispatch();
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     dispatch(
-      fetchUsersRequest({
+      loadUsersRequest({
         page: 1,
         search: event.target.value,
       })

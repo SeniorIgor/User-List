@@ -2,7 +2,7 @@
 
 import { RootState } from '../root-reducer';
 
-export const selectPeopleReducer = (state: RootState) => state.people;
+export const selectUserDetailsReducer = (state: RootState) => state.userDetails;
 
 // export const selectCartHidden = createSelector(
 //   selectPeopleReducer,

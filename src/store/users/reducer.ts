@@ -17,7 +17,7 @@ const initialState: PeopleState = {
   data: null,
 };
 
-const loadEUsersRequest = (
+const loadUsersRequest = (
   state: PeopleState,
   { page, search }: RequestPayload
 ) => ({
@@ -30,10 +30,10 @@ const loadEUsersRequest = (
 export const reducer = (state = initialState, action: Action): PeopleState => {
   switch (action.type) {
     case Types.LOAD_USERS_REQUEST:
-      return loadEUsersRequest(state, action.payload);
+      return loadUsersRequest(state, action.payload);
 
     case Types.LOAD_USERS_SUCCESS:
-      return { ...state, loading: false, data: action.payload };
+      return { ...state, loading: false, data: action.payload, error: null };
 
     case Types.LOAD_USERS_FAILURE:
       return { ...state, loading: false, error: action.payload };

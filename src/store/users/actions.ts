@@ -1,18 +1,18 @@
 import { Types, RequestPayload, Response } from './types';
 
-export interface FetchUsersRequest {
+export interface LoadUsersRequest {
   type: Types.LOAD_USERS_REQUEST;
   payload: RequestPayload;
 }
 
-export interface FetchUsersSuccess {
+export interface LoadUsersSuccess {
   type: Types.LOAD_USERS_SUCCESS;
   payload: Response;
 }
 
-export interface FetchUsersFailure {
+export interface LoadUsersFailure {
   type: Types.LOAD_USERS_FAILURE;
   payload: string;
 }
 
-export type Actions = FetchUsersRequest | FetchUsersSuccess | FetchUsersFailure;
+export type Actions = LoadUsersRequest | LoadUsersSuccess | LoadUsersFailure;

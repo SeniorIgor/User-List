@@ -1,4 +1,4 @@
-export interface Person {
+export interface User {
   name: string;
   height: string;
   mass: string;

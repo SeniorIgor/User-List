@@ -1,3 +1,4 @@
-import { Actions as ShopActions } from './people/actions';
+import { Actions as UsersActions } from './users/actions';
+import { Actions as UserDetailsActions } from './user-details/actions';
 
-export type Action = ShopActions;
+export type Action = UsersActions | UserDetailsActions;

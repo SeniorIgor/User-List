@@ -4,15 +4,15 @@ import { Link } from 'react-router-dom';
 import { Pagination } from '../Pagination';
 
 import { useTypedSelector, useTypedDispatch } from '../../hooks';
-import { selectPeopleReducer } from '../../store/people/selectors';
-import { fetchUsersRequest } from '../../store/people/action-creators';
+import { selectUsersReducer } from '../../store/users/selectors';
+import { loadUsersRequest } from '../../store/users/action-creators';
 
 import Style from './PeopleTable.module.sass';
 
 interface Props {}
 
 export const PeopleTable: FC<Props> = () => {
-  const { data, page, search } = useTypedSelector(selectPeopleReducer);
+  const { data, page, search } = useTypedSelector(selectUsersReducer);
   const dispatch = useTypedDispatch();
 
   const renderedPeople = useMemo(() => {
@@ -43,7 +43,7 @@ export const PeopleTable: FC<Props> = () => {
   }, [data]);
 
   const handlePageChange = (newPage: number) => {
-    dispatch(fetchUsersRequest({ page: newPage, search }));
+    dispatch(loadUsersRequest({ page: newPage, search }));
   };
 
   return (
