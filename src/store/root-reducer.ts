@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
-import { createBrowserHistory } from 'history';
+import { createHashHistory } from 'history';
 
 import { reducer as users } from './users/reducer';
 import { reducer as userDetails } from './user-details/reducer';
 
-export const history = createBrowserHistory();
+export const history = createHashHistory({
+  hashType: 'slash',
+});
 
 const rootReducer = combineReducers({
   users,
