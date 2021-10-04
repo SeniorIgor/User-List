@@ -1,6 +1,6 @@
 {
-  "name": "user-list",
   "homepage": "http://SeniorIgor.github.io/User-List",
+  "name": "user-list",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
